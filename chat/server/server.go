@@ -43,7 +43,7 @@ func main() {
 	for {
 		if conn, err := listener.Accept(); err == nil {
 			msgHandler := messages.NewMessageHandler(conn)
-			go handleClient(msgHandler)
+			handleClient(msgHandler)
 		}
 	}
 }
