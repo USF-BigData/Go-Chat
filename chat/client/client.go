@@ -14,15 +14,14 @@ func main() {
 	fmt.Println("Hello, " + user)
 
 	host := os.Args[2]
-	conn, err := net.Dial("tcp", host+":9999") // connect to localhost port 9999
+	conn, err := net.Dial("tcp", host)
 	if err != nil {
 		log.Fatalln(err.Error())
 		return
 	}
+	defer conn.Close()
 
 	msgHandler := messages.NewMessageHandler(conn)
-
-	defer conn.Close()
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
